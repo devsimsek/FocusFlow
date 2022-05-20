@@ -12,9 +12,9 @@ public class FocusFlow {
 
     private static int sessionCount = 0;
 
-    private static int breakLength = 1;
+    private static int breakLength = 5;
 
-    private static int sessionLength = 1;
+    private static int sessionLength = 15;
 
     public static void run() {
         JLabel label = new JLabel("FocusFlow");

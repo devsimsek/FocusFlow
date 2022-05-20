@@ -8,6 +8,12 @@ A brand new helper for focus.
 
 FocusFlow is an application which helps you to stay focused on your project or lesson.
 
+## Information
+
+Jdk Version: 17.0.1
+IDE: Intellij IDEA
+Compiler: Javac
+
 ## Features
 
 [ ]: Sound System
@@ -18,12 +24,12 @@ FocusFlow is an application which helps you to stay focused on your project or l
 
 ## Roadmap
 
-- v1 
-  - Optimize code.
-  - Make distributions (mac, linux)
+- v1
+    - Optimize code.
+    - Make distributions (mac, linux)
 - Maybe/s
-  - Windows version.
-  - Android version.
+    - Windows version.
+    - Android version.
 
 ## Contributing
 
