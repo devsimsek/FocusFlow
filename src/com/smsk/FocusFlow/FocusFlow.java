@@ -1,3 +1,5 @@
+package com.smsk.FocusFlow;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.TimerTask;
@@ -56,7 +58,7 @@ public class FocusFlow {
         grid.add(time, BorderLayout.CENTER);
         grid.add(analytics, BorderLayout.CENTER);
         grid.add(button, BorderLayout.CENTER);
-        wind.addComponent(grid);
+        wind.add(grid);
         wind.build();
         wind.frame.repaint();
 
@@ -97,45 +99,5 @@ public class FocusFlow {
                 }
             }
         }, delay, period);
-    }
-}
-
-class Window {
-
-    protected JPanel panel = new JPanel();
-    protected JFrame frame = new JFrame();
-    protected String windowTitle;
-    protected boolean isVisible;
-
-    Window(String windowTitle, boolean isVisible) {
-        this.windowTitle = windowTitle;
-        this.isVisible = isVisible;
-    }
-
-    public void addComponent(Component comp) {
-        System.out.println("Adding " + comp.getClass() + " component.");
-        panel.add(comp);
-    }
-
-    public void setBackground(Color color) {
-        panel.setBackground(color);
-    }
-
-    public void setSize(int x, int y) {
-        panel.setPreferredSize(new Dimension(x, y));
-        panel.setMaximumSize(panel.getPreferredSize());
-        panel.setMinimumSize(panel.getPreferredSize());
-    }
-
-    public void build() {
-        System.out.println("Ready to build window");
-        frame.setTitle(windowTitle);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(isVisible);
-        frame.setResizable(false);
-        System.out.println("Build Complete");
     }
 }
