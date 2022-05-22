@@ -17,13 +17,13 @@ Compiler: Javac
 ## Features
 
 - [ ] : Sound System
- 
-- [ ] : Better UI
- 
+
+- [x] : Better UI
+
 - [ ] : Settings (Periods)
- 
+
 - [ ] : Blocklist Applications
- 
+
 - [ ] : Themes
 
 ## Roadmap
