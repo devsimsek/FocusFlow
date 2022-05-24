@@ -10,10 +10,39 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.smsk.FocusFlow.Main'
+    }
+}
+
+task GenerateApp {
+    dependsOn jar
+    doLast {
+        def dist = "${buildDir}/app/${project.name}.app"
+        mkdir("$dist/Contents/MacOS")
+        mkdir("$dist/Contents/Resources")
+        ant.copy(file: "src/main/resources/Info.plist", todir: "$dist/Contents")
+        ant.copy(file: "src/main/resources/launcher", todir: "$dist/Contents/MacOS") {
+            filterset {
+                filter(token: 'APP_JAR', value: "${project.name}-${version}.jar")
+                filter(token: 'APP_NAME', value: project.name)
+                filter(token: 'JAVA_VERSION', value: jvm_version)
+            }
+        }
+        ant.copy(file: "src/main/resources/AppIcon.icns", todir: "$dist/Contents/Resources")
+        ant.copy(file: "src/main/resources/AppIcon.png", todir: "$dist/Contents/Resources")
+        ant.copy(file: "build/libs/${project.name}-${version}.jar", todir: "$dist/Contents/MacOS")
+        project.exec {
+            commandLine('chmod', '+x', "$dist/Contents/MacOS/launcher")
+        }
+    }
 }

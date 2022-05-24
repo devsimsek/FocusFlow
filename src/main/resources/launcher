@@ -1,0 +1,48 @@
+#!/bin/bash
+# Author: Pedro Maroco (www.pmaroco.com)
+# Modified: nwillc@mail.com
+# Modified: devsimsek (https://github.com/devsimsek)
+
+# Constants
+JAVA_VERSION="17"
+APP_JAR="@APP_JAR@"
+APP_NAME="@APP_NAME@"
+VM_ARGS=""
+
+# Set the working directory
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)
+
+# Error message for NO JAVA dialog
+ERROR_TITLE="Cannot launch $APP_NAME"
+ERROR_MSG="$APP_NAME requires Java version $JAVA_VERSION or later to run."
+DOWNLOAD_URL="https://www.oracle.com/java/technologies/downloads/#java17"
+
+# Is Java installed?
+if type -p java; then
+  _java=java
+elif [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]]; then
+  _java="$JAVA_HOME/bin/java"
+else
+  osascript \
+    -e "set question to display dialog \"$ERROR_MSG\" with title \"$ERROR_TITLE\" buttons {\"Cancel\", \"Download\"} default button 2" \
+    -e "if button returned of question is equal to \"Download\" then open location \"$DOWNLOAD_URL\""
+  echo "$ERROR_TITLE"
+  echo "$ERROR_MSG"
+  exit 1
+fi
+
+# Java version check
+if [[ "$_java" ]]; then
+  version=$("$_java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
+  if [[ "$version" < "$JAVA_VERSION" ]]; then
+    osascript \
+      -e "set question to display dialog \"$ERROR_MSG\" with title \"$ERROR_TITLE\" buttons {\"Cancel\", \"Download\"} default button 2" \
+      -e "if button returned of question is equal to \"Download\" then open location \"$DOWNLOAD_URL\""
+    echo "$ERROR_TITLE"
+    echo "$ERROR_MSG"
+    exit 1
+  fi
+fi
+
+# Run the application
+exec $_java $VM_ARGS -Dapple.laf.useScreenMenuBar=true -Dcom.apple.macos.use-file-dialog-packages=true -Xdock:name="$APP_NAME" -Xdock:icon="$DIR/../Resources/application.icns" -cp ".;$DIR;" -jar "$DIR/$APP_JAR"

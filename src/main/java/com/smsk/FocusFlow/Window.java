@@ -1,8 +1,11 @@
+package com.smsk.FocusFlow;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
+import java.net.URL;
+import java.util.Objects;
 
 /**
  * Copyright (C)devsimsek.
@@ -22,10 +25,6 @@ public class Window {
 
     public void setResizeable(boolean resizeable) {
         this.isResizeable = resizeable;
-    }
-
-    public void setImage() {
-
     }
 
     public void toFront() {
@@ -99,6 +98,25 @@ public class Window {
 
     public void repaint() {
         frame.repaint();
+    }
+
+    public void setIcon(String image) {
+        try {
+            var icon = new ImageIcon(Objects.requireNonNull(Main.class.getResource("/" + image)));
+            frame.setIconImage(icon.getImage());
+            if (System.getProperty("os.name").startsWith("Mac") || System.getProperty("os.name").startsWith("Darwin")) {
+                Taskbar taskbar = Taskbar.getTaskbar();
+                try {
+                    taskbar.setIconImage(icon.getImage());
+                } catch (final UnsupportedOperationException e) {
+                    System.out.println("Can't set taskbar icon.");
+                } catch (final SecurityException e) {
+                    System.out.println("Warning. Can't set taskbar icon due to security exceptions.");
+                }
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     public void build() {

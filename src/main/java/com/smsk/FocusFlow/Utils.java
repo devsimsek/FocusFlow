@@ -1,3 +1,4 @@
+package com.smsk.FocusFlow;
 public class Utils {
 
     public static boolean debug = true;

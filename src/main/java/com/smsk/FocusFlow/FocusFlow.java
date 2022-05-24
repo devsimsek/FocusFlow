@@ -1,6 +1,9 @@
+package com.smsk.FocusFlow;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Objects;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
@@ -119,6 +122,7 @@ public class FocusFlow {
 
             // Configure
             window.setTitle("FocusFlow");
+            window.setIcon("AppIcon.png");
             window.setBackground(Color.decode("#264653"));
             window.setSize();
             window.setSize(new Dimension(300, 140));
