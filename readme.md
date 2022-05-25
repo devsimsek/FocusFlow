@@ -16,7 +16,7 @@ Compiler: Javac
 
 ## Features
 
-- [ ] : Sound System
+- [x] : Sound System
 
 - [x] : Better UI
 
