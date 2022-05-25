@@ -98,7 +98,7 @@ public class FocusFlow {
                             PlaySound.play("Bottle.wav");
                             window.setVisible(false);
                             window.repaint();
-                            Notification.sendNotification("Breaktime!", "Go have some rest.");
+                            Notification.sendNotification("Break time!", "Go have some rest.\nYou've completed " + sessionCount + " sessions today.");
                             window.setVisible(true);
                             window.repaint();
                         } else {
@@ -109,7 +109,7 @@ public class FocusFlow {
                             button.setText("Start");
                             PlaySound.play("Bottle.wav");
                             window.setVisible(false);
-                            Notification.sendNotification("Worktime!", "Come back to work!");
+                            Notification.sendNotification("Work time!", "Come back to work!");
                             window.setVisible(true);
                         }
                     }
