@@ -3,6 +3,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/devsimsek/FocusFlow)](https://github.com/devsimsek/FocusFlow/issues)
 [![GitHub license](https://img.shields.io/github/license/devsimsek/FocusFlow)](https://github.com/devsimsek/FocusFlow)
 [![GitHub stars](https://img.shields.io/github/stars/devsimsek/FocusFlow)](https://github.com/devsimsek/FocusFlow/stargazers)
+[![MacOs Build](https://github.com/devsimsek/FocusFlow/actions/workflows/gradle.yml/badge.svg)](https://github.com/devsimsek/FocusFlow/actions/workflows/gradle.yml)
 
 A brand new helper for focus.
 
