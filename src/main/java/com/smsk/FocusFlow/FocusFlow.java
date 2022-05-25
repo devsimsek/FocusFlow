@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class FocusFlow {
     private final Window window = new Window();
 
-    private static boolean sessionRunning = true;
+    private static boolean sessionRunning = false;
 
     private static boolean isBreak = false;
 
@@ -37,7 +37,7 @@ public class FocusFlow {
         appLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         appLabel.setBorder(new EmptyBorder(20, 10, 0, 0));
 
-        JLabel sessionCountLabel = new JLabel("Session Count");
+        JLabel sessionCountLabel = new JLabel("Click start to start a session.");
         sessionCountLabel.setForeground(Color.white);
         sessionCountLabel.setFont(new Font(sessionCountLabel.getFont().getName(), sessionCountLabel.getFont().getStyle(), 12));
         sessionCountLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -47,7 +47,7 @@ public class FocusFlow {
         stopWatch.setFont(new Font(stopWatch.getFont().getName(), Font.BOLD, 45));
         stopWatch.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton stopButton = new JButton("Stop");
+        JButton stopButton = new JButton(sessionRunning ? "Stop" : "Start");
         stopButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         stopButton.setBorderPainted(false);
         stopButton.setFocusPainted(false);
@@ -82,6 +82,7 @@ public class FocusFlow {
         int period = 1000;
         int[] interval = new int[1];
         interval[0] = sessionLength * 60;
+        timer.setText((TimeUnit.SECONDS.toMinutes((sessionLength * 60)) < 10 ? "0" + TimeUnit.SECONDS.toMinutes((sessionLength * 60)) : TimeUnit.SECONDS.toMinutes((sessionLength * 60))) + ":" + ((TimeUnit.SECONDS.toSeconds((sessionLength * 60)) - TimeUnit.SECONDS.toMinutes((sessionLength * 60)) * 60) < 10 ? "0" + (TimeUnit.SECONDS.toSeconds((sessionLength * 60)) - TimeUnit.SECONDS.toMinutes((sessionLength * 60)) * 60) : (TimeUnit.SECONDS.toSeconds((sessionLength * 60)) - TimeUnit.SECONDS.toMinutes((sessionLength * 60)) * 60)));
         StopWatch.start(new TimerTask() {
             @Override
             public void run() {
@@ -94,15 +95,25 @@ public class FocusFlow {
                             status.setText("FocusFlow | Break");
                             sessionRunning = false;
                             button.setText("Start");
-                            // todo Send notification here
+                            PlaySound.play("Bottle.wav");
+                            window.setVisible(false);
+                            window.repaint();
+                            Notification.sendNotification("Breaktime!", "Go have some rest.");
+                            window.setVisible(true);
+                            window.repaint();
                         } else {
+                            isBreak = false;
                             interval[0] = sessionLength * 60;
                             status.setText("FocusFlow | Session");
                             sessionRunning = false;
                             button.setText("Start");
+                            PlaySound.play("Bottle.wav");
+                            window.setVisible(false);
+                            Notification.sendNotification("Worktime!", "Come back to work!");
+                            window.setVisible(true);
                         }
                     }
-                    count.setText(sessionCount + " session done.");
+                    count.setText(sessionCount + " session/s done.");
                     --interval[0];
                     // todo find a better way to handle this.
                     timer.setText((TimeUnit.SECONDS.toMinutes(interval[0]) < 10 ? "0" + TimeUnit.SECONDS.toMinutes(interval[0]) : TimeUnit.SECONDS.toMinutes(interval[0])) + ":" + ((TimeUnit.SECONDS.toSeconds(interval[0]) - TimeUnit.SECONDS.toMinutes(interval[0]) * 60) < 10 ? "0" + (TimeUnit.SECONDS.toSeconds(interval[0]) - TimeUnit.SECONDS.toMinutes(interval[0]) * 60) : (TimeUnit.SECONDS.toSeconds(interval[0]) - TimeUnit.SECONDS.toMinutes(interval[0]) * 60)));
@@ -140,7 +151,7 @@ public class FocusFlow {
             // Build!
             window.build();
             Benchmark.stop(1);
-            Utils.log("Window successfully built. Took " + Benchmark.result(1) + " seconds.", "WINDOW");
+            Utils.log("Window successfully built. Took " + Benchmark.result(1) + " ms.", "WINDOW");
         } catch (Error e) {
             Utils.log(e.getMessage(), "ERROR!");
         }

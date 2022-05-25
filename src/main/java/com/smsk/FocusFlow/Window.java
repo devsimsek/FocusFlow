@@ -21,6 +21,7 @@ public class Window {
 
     public void setVisible(boolean visible) {
         this.isVisible = visible;
+        frame.setVisible(this.isVisible);
     }
 
     public void setResizeable(boolean resizeable) {
@@ -109,9 +110,9 @@ public class Window {
                 try {
                     taskbar.setIconImage(icon.getImage());
                 } catch (final UnsupportedOperationException e) {
-                    System.out.println("Can't set taskbar icon.");
+                    Utils.log("Can't set taskbar icon.", "Warning");
                 } catch (final SecurityException e) {
-                    System.out.println("Warning. Can't set taskbar icon due to security exceptions.");
+                    Utils.log("Can't set taskbar icon due to security exceptions.", "Warning");
                 }
             }
         } catch (NullPointerException e) {

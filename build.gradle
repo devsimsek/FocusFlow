@@ -24,10 +24,17 @@ jar {
     }
 }
 
+tasks.register('CopyResources', Copy) {
+    from(layout.buildDirectory) {
+        include "src/main/resources/**"
+    }
+    into layout.buildDirectory.dir("resources")
+}
+
 task GenerateApp {
     dependsOn jar
     doLast {
-        def dist = "${buildDir}/app/${project.name}.app"
+        def dist = "${buildDir}/app/${project.name}_${version}.app"
         mkdir("$dist/Contents/MacOS")
         mkdir("$dist/Contents/Resources")
         ant.copy(file: "src/main/resources/Info.plist", todir: "$dist/Contents")
