@@ -53,6 +53,28 @@ public class Notification {
      * @param message the message that will be prompted
      */
     public static void sendNotification(String title, String message) {
+        PlaySound.play("Bottle.wav");
+        var container = new JFrame();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (dim.width - container.getSize().width) / 2;
+        int y = (dim.height - container.getSize().height) / 2;
+        container.setPreferredSize(new Dimension(x, y));
+        container.setAlwaysOnTop(true);
+        container.setVisible(false);
+        container.toFront();
+        container.requestFocus();
+        container.pack();
+        container.setFocusable(true);
+        container.getContentPane().setPreferredSize(container.getPreferredSize().getSize());
+        int response = JOptionPane.showOptionDialog(container, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Yes"}, JOptionPane.YES_OPTION);
+        if (response == JOptionPane.YES_OPTION || response == JOptionPane.CLOSED_OPTION) {
+            // start break
+            container.dispose();
+        }
+    }
+
+    public static void sendNotification(String title, String message, String sound) {
+        PlaySound.play(sound);
         var container = new JFrame();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (dim.width - container.getSize().width) / 2;

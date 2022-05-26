@@ -3,7 +3,6 @@ package com.smsk.FocusFlow;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.Objects;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
@@ -95,7 +94,6 @@ public class FocusFlow {
                             status.setText("FocusFlow | Break");
                             sessionRunning = false;
                             button.setText("Start");
-                            PlaySound.play("Bottle.wav");
                             window.setVisible(false);
                             window.repaint();
                             Notification.sendNotification("Break time!", "Go have some rest.\nYou've completed " + sessionCount + " sessions today.");
@@ -107,7 +105,6 @@ public class FocusFlow {
                             status.setText("FocusFlow | Session");
                             sessionRunning = false;
                             button.setText("Start");
-                            PlaySound.play("Bottle.wav");
                             window.setVisible(false);
                             Notification.sendNotification("Work time!", "Come back to work!");
                             window.setVisible(true);

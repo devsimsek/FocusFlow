@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Copyright (C)devsimsek.
  *
- * @version v1.0.1
+ * @version v1.0.0
  */
 public class Window {
 
