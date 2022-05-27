@@ -1,5 +1,8 @@
 # Welcome to FocusFlow
 
+![FocusFlow](https://user-images.githubusercontent.com/75851971/170650898-534d1ee1-d12d-4ba8-80ca-ed35c029ee57.png)
+![FocusFlow Preview](https://user-images.githubusercontent.com/75851971/170650971-2b6d23fa-7639-4447-8dff-0132a52affc8.png)
+
 [![GitHub issues](https://img.shields.io/github/issues/devsimsek/FocusFlow)](https://github.com/devsimsek/FocusFlow/issues)
 [![GitHub license](https://img.shields.io/github/license/devsimsek/FocusFlow)](https://github.com/devsimsek/FocusFlow)
 [![GitHub stars](https://img.shields.io/github/stars/devsimsek/FocusFlow)](https://github.com/devsimsek/FocusFlow/stargazers)
