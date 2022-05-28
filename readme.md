@@ -15,8 +15,10 @@ FocusFlow is an application which helps you to stay focused on your project or l
 ## Information
 
 Jdk Version: 17.0.1
+
 IDE: Intellij IDEA
-Compiler: Javac
+
+Compiler: ./gradlew
 
 ## Features
 
