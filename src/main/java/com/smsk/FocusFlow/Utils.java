@@ -1,4 +1,7 @@
 package com.smsk.FocusFlow;
+
+import java.util.concurrent.TimeUnit;
+
 public class Utils {
 
     public static boolean debug = true;
@@ -31,6 +34,10 @@ public class Utils {
             else
                 System.out.print("FocusFlow " + flag + ": " + message);
         }
+    }
+    
+    public static String toReadableTime(int seconds) {
+        return (TimeUnit.SECONDS.toMinutes(seconds) < 10 ? "0" + TimeUnit.SECONDS.toMinutes(seconds) : TimeUnit.SECONDS.toMinutes(seconds)) + ":" + ((TimeUnit.SECONDS.toSeconds(seconds) - TimeUnit.SECONDS.toMinutes(seconds) * 60) < 10 ? "0" + (TimeUnit.SECONDS.toSeconds(seconds) - TimeUnit.SECONDS.toMinutes(seconds) * 60) : (TimeUnit.SECONDS.toSeconds(seconds) - TimeUnit.SECONDS.toMinutes(seconds) * 60));
     }
 
 }

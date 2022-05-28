@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class FocusFlow {
     private final Window window = new Window();
@@ -81,7 +80,7 @@ public class FocusFlow {
         int period = 1000;
         int[] interval = new int[1];
         interval[0] = sessionLength * 60;
-        timer.setText((TimeUnit.SECONDS.toMinutes((sessionLength * 60)) < 10 ? "0" + TimeUnit.SECONDS.toMinutes((sessionLength * 60)) : TimeUnit.SECONDS.toMinutes((sessionLength * 60))) + ":" + ((TimeUnit.SECONDS.toSeconds((sessionLength * 60)) - TimeUnit.SECONDS.toMinutes((sessionLength * 60)) * 60) < 10 ? "0" + (TimeUnit.SECONDS.toSeconds((sessionLength * 60)) - TimeUnit.SECONDS.toMinutes((sessionLength * 60)) * 60) : (TimeUnit.SECONDS.toSeconds((sessionLength * 60)) - TimeUnit.SECONDS.toMinutes((sessionLength * 60)) * 60)));
+        timer.setText(Utils.toReadableTime(interval[0]));
         StopWatch.start(new TimerTask() {
             @Override
             public void run() {
@@ -111,9 +110,10 @@ public class FocusFlow {
                         }
                     }
                     count.setText(sessionCount + " session/s done.");
-                    --interval[0];
-                    // todo find a better way to handle this.
-                    timer.setText((TimeUnit.SECONDS.toMinutes(interval[0]) < 10 ? "0" + TimeUnit.SECONDS.toMinutes(interval[0]) : TimeUnit.SECONDS.toMinutes(interval[0])) + ":" + ((TimeUnit.SECONDS.toSeconds(interval[0]) - TimeUnit.SECONDS.toMinutes(interval[0]) * 60) < 10 ? "0" + (TimeUnit.SECONDS.toSeconds(interval[0]) - TimeUnit.SECONDS.toMinutes(interval[0]) * 60) : (TimeUnit.SECONDS.toSeconds(interval[0]) - TimeUnit.SECONDS.toMinutes(interval[0]) * 60)));
+                    if (sessionRunning) {
+                        --interval[0];
+                    }
+                    timer.setText(Utils.toReadableTime(interval[0]));
                     window.repaint();
                 }
             }
