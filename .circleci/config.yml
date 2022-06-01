@@ -1,17 +1,15 @@
 version: 2.1
 executors:
-  my-custom-executor:
+  gradleopenjdk17:
     docker:
       - image: cimg/openjdk:17.0.1
         auth:
-          # ensure you have first added these secrets
-          # visit app.circleci.com/settings/project/github/devsimsek/FocusFlow/environment-variables
           username: $DOCKER_HUB_USER
           password: $DOCKER_HUB_PASSWORD
 jobs:
   gradle:
 
-    executor: my-custom-executor
+    executor: gradleopenjdk17
     steps:
       - checkout
       - run: |
