@@ -19,7 +19,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
+          name: "Run Gradle App"
           command: "./gradlew :clean GenerateApp"
 
 # Invoke jobs via workflows
